@@ -1,0 +1,241 @@
+"""
+NOTE: TENSORFLOW >=2.0 NEEDS TO BE INSTALLED TO RUN THIS
+The experiments were run using tensorflow version 2.4.1 and python 3.8.8
+
+This script imports from the folder Libs: Net and Trainer_PCA
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+from matplotlib import gridspec
+import seaborn as sns; sns.set_theme(style="white")
+from scipy import stats
+from scipy import signal
+from dis import dis
+
+if input('Regenerate data? (y/n) DEFAULT = n \n')=='y':
+##### Load Data
+    print('REGENERATING...\n')
+ 
+    t_delay=10 #Sindy delay
+
+    def load_data(): 
+        ## Map:
+        _data=np.loadtxt('Data/Henon_Map_J.txt')
+        ### MAKE SURE OUTPUT LIVES INSIDE UNIT CUBE
+        
+        rng=np.random.default_rng(12345)
+        data=np.zeros((_data.shape[0]-t_delay,t_delay))
+        for i in range(t_delay):
+            data[:,i]=_data[i:_data.shape[0]-t_delay+i,0]
+            
+        data = data-np.mean(data.flatten())
+        data = data/(5*max(data.flatten()))
+        data+=rng.normal(0,.00001,data.shape)
+        return data
+
+    data=load_data()
+
+    ###################################
+    # Plot Loaded Data:
+    ###################################
+
+    fig=plt.figure()
+    ax=fig.add_subplot()
+    ax.plot(data[:1000,0],data[:1000,1],linewidth=0.1,color='red')
+    ax.set_title('Loaded Data:')
+    plt.show()
+
+    #############################################
+    # SINDY Prediction
+    #############################################
+
+    train_len=5000    # Nuber of datasteps used in training
+    discard=1000    #Wait for the network to forget
+    prediction_len=10500  #Timesteps predicted into the future after training
+
+    u_data=data[0:]
+
+    import pysindy as ps
+
+    dt = 0.1
+    S = train_len+discard
+
+    feature_names = [f"x{d}" for d in range(t_delay)]
+
+    # model = ps.SINDy(feature_names=feature_names, discrete_time=True)
+    # model.fit(u_data[discard: discard+train_len], t = dt)
+    # model.print()
+
+    # print('Model score: %f' % model.score(u_data[S:S+prediction_len], t=dt))
+
+    # t_test = np.arange(0, prediction_len*dt, dt)
+    # x_test_sim = model.simulate(u_data[S], t_test)
+
+    optimizer = ps.STLSQ(threshold=0.1)
+    library = ps.PolynomialLibrary(degree=5) 
+    model = ps.SINDy(
+        feature_library=library,
+        discrete_time=True
+    )
+    model.fit(u_data[discard: discard+train_len])
+    model.print()
+
+    x_test_sim = model.simulate(u_data[S+1], prediction_len)
+
+    #############################################
+    # Saving Data
+    #############################################
+    np.savetxt('Predicted_Data/Henon_Fine/Sindy_Fine_predicted.txt',x_test_sim)
+    np.savetxt('Predicted_Data/Henon_Fine/Sindy_Fine_actual.txt',u_data[S:])
+
+#############################################
+# Plotting
+#############################################
+
+u_predicted=np.loadtxt('Predicted_Data/Henon_Fine/Sindy_Fine_predicted.txt')
+u_data=np.loadtxt('Predicted_Data/Henon_Fine/Sindy_Fine_actual.txt')
+print(f"{len(u_predicted)}, {len(u_data)}")
+S=0
+plot_len1=1000
+plot_len2=10000
+pl_len3=10000
+plt.rcParams['figure.figsize'] = [15, 4]
+
+spec = gridspec.GridSpec( nrows=2,ncols=1,
+                         hspace=0.3,height_ratios=[1, 1])
+fig=plt.figure()
+axs0=fig.add_subplot(spec[0])
+axs1=fig.add_subplot(spec[1])
+
+axs1.plot(range(S,S+plot_len1),u_predicted[S:S+plot_len1,0],lw=0.5,color='darkblue')
+axs0.plot(range(S,S+plot_len1),u_data[S:S+plot_len1,0],lw=0.5,color='red')
+axs1.set_title('Predicted',fontsize=15)
+axs0.set_title('Actual',fontsize=15)
+plt.savefig('Img/Henon_Fine/Sindy-Traj.png')
+plt.show()
+# 
+plt.rcParams['figure.figsize'] = [5,5]
+fig = plt.figure()
+ax0 = fig.add_subplot()
+
+
+ax0.plot(u_predicted[:pl_len3], u_predicted[1:pl_len3+1],'k.',color='blue',markersize=0.5)
+
+
+ax0.xaxis.set_ticklabels([])
+ax0.yaxis.set_ticklabels([])
+
+ax0.plot(u_data[:pl_len3], u_data[1:pl_len3+1],'k.',color='red',markersize=0.5)
+
+plt.savefig('Img/Henon_Fine/Sindy-Attractor-Overlay.png')
+plt.show()
+
+#
+####
+plt.rcParams['figure.figsize'] = [16, 8]
+
+spec = gridspec.GridSpec( nrows=1,ncols=2,
+                         hspace=0.3,height_ratios=[1])
+fig=plt.figure()
+axs2=fig.add_subplot(spec[0])
+axs3=fig.add_subplot(spec[1])
+
+axs2.scatter(u_data[S:S+pl_len3, 0],u_data[S+1:S+pl_len3+1,0],lw=0.06,color='red', s = 0.5)
+axs2.set_title('Actual',fontsize=15)
+axs3.scatter(u_predicted[S:S+pl_len3, 0],u_predicted[S+1:S+pl_len3+1,0],lw=0.06,color='blue', s = 0.5)
+axs3.set_title('Predicted',fontsize=15)
+plt.savefig('Img/Henon_Fine/Sindy-Attractor.png')
+plt.show()
+
+fig, axs=plt.subplots(1,1)
+axs.hist(u_data[0:pl_len3,0],500,color='red',alpha=0.7, histtype = 'stepfilled')
+axs.hist(u_predicted[0:pl_len3,0],500,color='darkblue',alpha=0.7, histtype = 'stepfilled')
+axs.legend(['Actual','Predicted'], loc='upper center',fontsize=15)
+
+axs.tick_params(axis='x', labelsize=22)
+axs.tick_params(axis='y', labelsize=22)
+plt.savefig('Img/Henon_Fine/Sindy-Hist.png')
+plt.show()
+
+## Autocorrelation
+
+z_auto_pred = signal.correlate(u_predicted[0:pl_len3,0], u_predicted[0:pl_len3,0])
+z_auto_data = signal.correlate(u_data[0:pl_len3,0], u_data[0:pl_len3,0])
+z_cross = signal.correlate(u_data[0:pl_len3,0],u_predicted[0:pl_len3,0])
+# z_cross/=np.sqrt(z_auto_pred[pl_len3]*z_auto_data[pl_len3])
+# z_auto_pred/=z_auto_pred[pl_len3]
+# z_auto_data/=z_auto_data[pl_len3]
+lags = signal.correlation_lags(len(u_data[0:pl_len3,0]), len(u_predicted[0:pl_len3,0]))
+
+fig, (ax_orig, ax_noise) = plt.subplots(2, 1, sharex=True)
+ax_noise.plot(lags[pl_len3-100:pl_len3+100], z_auto_data[pl_len3-100:pl_len3+100],lw=0.8,color='red')
+ax_noise.set_title('Autocorrelation of Actual Data')
+
+ax_orig.plot(lags[pl_len3-100:pl_len3+100], z_auto_pred[pl_len3-100:pl_len3+100],lw=0.8,color='blue')
+ax_orig.set_title('Autocorrelation of Prediction ')
+
+ax_orig.margins(0, 0.1)
+fig.tight_layout()
+
+plt.savefig('Img/Henon_Fine/Sindy-Autocor.png')
+plt.show()
+
+fig, ax_orig = plt.subplots(1, 1, sharex=True)
+ax_orig.plot(lags[pl_len3-500:pl_len3+500], z_auto_data[pl_len3-500:pl_len3+500],lw=0.8,color='red', label = "Actual")
+ax_orig.set_title('Autocorrelation of Actual Data')
+ax_orig.set(ylim=(-10, 90))
+ax_orig.plot(lags[pl_len3-500:pl_len3+500], z_auto_pred[pl_len3-500:pl_len3+500],lw=0.8,color='blue', label="Predicted")
+ax_orig.set_title('Autocorrelation of Prediction ')
+ax_orig.legend(loc = 'upper center', fontsize = 22, ncol = 2)
+ax_orig.xaxis.set_tick_params(labelsize = 22)
+ax_orig.yaxis.set_tick_params(labelsize = 22)
+ax_orig.margins(0, 0.1)
+fig.tight_layout()
+
+plt.savefig('Img/Henon_Fine/Sindy-Autocor-Overlay.png')
+plt.show()
+### Wasserstein Distances
+
+Ns=[10000]
+for n in Ns:
+    print(f"Wasserstein distance for {n} timesteps: ",stats.wasserstein_distance(u_data[0:n,0],u_predicted[0:n,0]) )
+
+x_data=u_data[:,0]
+x_data.sort()
+
+x_predicted=u_predicted[:,0]
+x_predicted.sort()
+
+x=np.linspace(-1,1,1000,endpoint=False)
+
+
+def bin_search(x,sorted_data):
+    l=0
+    u=len(sorted_data)
+    while l<u-1:
+        m=(l+u)//2
+        if x<sorted_data[m]:
+            u=m
+        else: l=m
+
+    return l
+
+def CDF(x, sorted_data):
+    s=bin_search(x,sorted_data)
+    return 1/len(sorted_data)*s
+
+
+plt.rcParams['figure.figsize'] = [8, 4]
+y1=[CDF(t,x_data) for t in x]
+y2=[CDF(t,x_predicted) for t in x]
+fig,ax=plt.subplots()
+ax.plot(x,y1,color='red',alpha=0.5)
+ax.plot(x,y2,color='blue',alpha=0.5)
+ax.set_title("")
+ax.legend(["Actual","Predicted"])
+ax.set_xlim([-0.8,0.8])
+
+plt.savefig('Img/Henon_Fine/Sindy-CDF.png')
+plt.show()

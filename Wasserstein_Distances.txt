@@ -1,0 +1,128 @@
+===============================
+======= Double Pendulum =======
+===============================
+============= ESN =============
+Wasserstein distance for 1000 timesteps: 0.00609359233876797
+Wasserstein distance for 2000 timesteps: 0.011645815601552423
+Wasserstein distance for 5000 timesteps: 0.015814051536507164
+Wasserstein distance for 10000 timesteps: nan
+============= RCN =============
+Wasserstein distance for 1000 timesteps: 0.004751661175626971
+Wasserstein distance for 2000 timesteps: 0.0034772226449728957
+Wasserstein distance for 5000 timesteps: 0.0038691155395864825
+Wasserstein distance for 10000 timesteps: 0.003925502530955415
+============ Takens ===========
+Wasserstein distance for 1000 timesteps: 0.012652045226079994
+Wasserstein distance for 2000 timesteps: 0.0135068720969912
+Wasserstein distance for 5000 timesteps: 0.013519546903964813
+Wasserstein distance for 10000 timesteps: 0.013677836641809996
+============ Sindy ===========
+Wasserstein distance for 1000 timesteps: 0.06478022193941498
+Wasserstein distance for 2000 timesteps: 0.06570078554092784
+Wasserstein distance for 5000 timesteps: 0.06589543015813933
+Wasserstein distance for 10000 timesteps: 0.06605988833094296
+=============================
+======= Lorenz Course =======
+=============================
+============ ESN ============
+Wasserstein distance for 1000 timesteps: nan
+Wasserstein distance for 2000 timesteps: nan
+Wasserstein distance for 5000 timesteps: nan
+Wasserstein distance for 10000 timesteps: nan
+============ RCN ============
+Wasserstein distance for 1000 timesteps: 0.0177792141214986
+Wasserstein distance for 2000 timesteps: 0.013475395248584873
+Wasserstein distance for 5000 timesteps: 0.0073127693094058085
+Wasserstein distance for 10000 timesteps: 0.007152283314105264
+=========== Takens ==========
+Wasserstein distance for 1000 timesteps: 0.007303693336243153
+Wasserstein distance for 2000 timesteps: 0.0026684754830271643
+Wasserstein distance for 5000 timesteps: 0.0038135098006373044
+Wasserstein distance for 10000 timesteps: 0.002307344154758642
+=========== Sindy ==========
+Wasserstein distance for 1000 timesteps: 0.013653392131473825
+Wasserstein distance for 2000 timesteps: 0.013331514725461537
+Wasserstein distance for 5000 timesteps: 0.009424142734538912
+Wasserstein distance for 10000 timesteps: 0.009419380148559546
+=============================
+============ Henon ==========
+=============================
+============ ESN ============
+Wasserstein distance for 1000 timesteps: nan
+Wasserstein distance for 2000 timesteps: nan
+Wasserstein distance for 5000 timesteps: nan
+Wasserstein distance for 10000 timesteps: nan
+============ RCN ============
+Wasserstein distance for 1000 timesteps: 0.003326022103749357
+Wasserstein distance for 2000 timesteps: 0.0031302130070787124
+Wasserstein distance for 5000 timesteps: 0.0036091896126187067
+Wasserstein distance for 10000 timesteps: 0.0024918847027996854
+=========== Takens ==========
+Wasserstein distance for 1000 timesteps: 0.035700542113187524
+Wasserstein distance for 2000 timesteps: 0.03818445896837845
+Wasserstein distance for 5000 timesteps: 0.042226220175103996
+Wasserstein distance for 10000 timesteps: 0.043815658142950006
+=========== Sindy ==========
+Wasserstein distance for 1000 timesteps: 0.014093678529220452
+Wasserstein distance for 2000 timesteps: 0.02944405349116861
+Wasserstein distance for 5000 timesteps: 0.04244001861871306
+Wasserstein distance for 10000 timesteps: 0.0469694265800645
+=============================
+========= Henon Fine ========
+=============================
+============ ESN ============
+Wasserstein distance for 1000 timesteps: nan
+Wasserstein distance for 2000 timesteps: nan
+Wasserstein distance for 5000 timesteps: nan
+Wasserstein distance for 10000 timesteps: nan
+============ RCN ============
+Wasserstein distance for 1000 timesteps: 0.001842076524123575
+Wasserstein distance for 2000 timesteps: 0.004731344312257134
+Wasserstein distance for 5000 timesteps: 0.0005628113132495089
+Wasserstein distance for 10000 timesteps: 0.000858577149477705
+=========== Takens ==========
+Wasserstein distance for 1000 timesteps: 0.002697433252249309
+Wasserstein distance for 2000 timesteps: 0.004520406000874592
+Wasserstein distance for 5000 timesteps: 0.005369020615373765
+Wasserstein distance for 10000 timesteps: 0.005764536804176914
+=========== Sindy ==========
+Wasserstein distance for 1000 timesteps: 0.012387746550804735
+Wasserstein distance for 2000 timesteps: 0.004583185576199751
+Wasserstein distance for 5000 timesteps: 0.001002291815606776
+Wasserstein distance for 10000 timesteps: 0.0013238871093489112
+=============================
+========= Logistic ==========
+=============================
+============ ESN ============
+Wasserstein distance for 1000 timesteps: nan
+Wasserstein distance for 2000 timesteps: nan
+Wasserstein distance for 5000 timesteps: nan
+Wasserstein distance for 10000 timesteps: nan
+============ RCN ============
+Wasserstein distance for 1000 timesteps: 0.01676017123955984
+Wasserstein distance for 2000 timesteps: 0.007217242918508714
+Wasserstein distance for 5000 timesteps: 0.004704035982514963
+Wasserstein distance for 10000 timesteps: 0.005152147147971872
+=========== Sindy ==========
+Wasserstein distance for 1000 timesteps: 0.02237891492310656
+Wasserstein distance for 2000 timesteps: 0.01627238325821838
+Wasserstein distance for 5000 timesteps: 0.013187972541610924
+Wasserstein distance for 10000 timesteps: 0.013701882358409556
+=============================
+============= PM ============
+=============================
+============ ESN ============
+Wasserstein distance for 1000 timesteps: nan
+Wasserstein distance for 2000 timesteps: nan
+Wasserstein distance for 5000 timesteps: nan
+Wasserstein distance for 10000 timesteps: nan
+============ RCN ============
+Wasserstein distance for 1000 timesteps: 0.02032479999909447
+Wasserstein distance for 2000 timesteps: 0.007384242659960489
+Wasserstein distance for 5000 timesteps: 0.006379194048650144
+Wasserstein distance for 10000 timesteps: 0.01174122928790718
+=========== Sindy ==========
+Wasserstein distance for 1000 timesteps: 0.07903542524412815
+Wasserstein distance for 2000 timesteps: 0.08287050791743394
+Wasserstein distance for 5000 timesteps: 0.082257308970122
+Wasserstein distance for 10000 timesteps: 0.08347362195162569

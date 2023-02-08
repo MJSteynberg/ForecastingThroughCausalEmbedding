@@ -1,0 +1,35 @@
+
+==================================== Double Pendulum =========================================
+Multivariate correlation between u_n and u_n+1: 0.9709837724647125
+Dimension of RNN: 10 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.982247805453697-2.752296246587275e-25j)
+Dimension of RNN: 100 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.9802841712848449-2.2854538980727705e-08j)
+Dimension of RNN: 1000 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.9853700057183803-1.9758909531916494e-08j)
+=================================== Lorenz-Coarse =====================================
+Multivariate correlation between u_n and u_n+1: 0.8567723741561633
+Dimension of RNN: 10 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.9443595204083212-7.630320569640669e-09j)
+Dimension of RNN: 100 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.9591636724855209-1.3692593255383067e-08j)
+Dimension of RNN: 1000 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.9702613797532396-1.8151517439621727e-08j)
+
+================================= Henon Map with Noise ==================================
+Multivariate correlation between u_n and u_n+1: -0.365249915343511
+Dimension of RNN: 10 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.35244664378017293-1.0955404734698861e-09j)
+Dimension of RNN: 100 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.7416172284209375-1.5842127890199415e-08j)
+Dimension of RNN: 1000 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.8529028884893447-3.177294860362153e-08j)
+
+================================= Henon Map with Less Noise ==================================
+Multivariate correlation between u_n and u_n+1: -0.365249915343511
+Dimension of RNN: 10 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.35244664378017293-1.0955404734698861e-09j)
+Dimension of RNN: 100 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.7416172284209375-1.5842127890199415e-08j)
+Dimension of RNN: 1000 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.8529028884893447-3.177294860362153e-08j)
+
+======================================== PM ===========================================
+Multivariate correlation between u_n and u_n+1: 0.8742862876079501
+Dimension of RNN: 10 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.9721681272504543-5.973830929936787e-09j)
+Dimension of RNN: 100 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.9890031341448924-2.5131304438289442e-08j)
+Dimension of RNN: 1000 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.993018752556904-3.325912771401956e-08j)
+
+==================================== Logistic =========================================
+Multivariate correlation between u_n and u_n+1: -0.029098154812357578
+Dimension of RNN: 10 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.5615052029564379+1.8384263314933792e-25j)
+Dimension of RNN: 100 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.7190628347409461-9.248709546295376e-09j)
+Dimension of RNN: 1000 Multivariate correlation between [x_n-1,x_n] and [x_n, x_n+1]: (0.788395482279127-9.044528618498673e-09j)
