@@ -1,5 +1,5 @@
 # ForecastingThroughCausalEmbedding
-The code use to generate the figures for the research paper "Universal set of Observables for Forecasting through Causal Embedding" and its suppliment.
+The code used to generate the figures for the research paper "Universal set of Observables for Forecasting through Causal Embedding" and its suppliment.
 
 ## Structure of the repository:
 - Data: Contains the data files used for training and testing the programs.
